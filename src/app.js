@@ -12,7 +12,9 @@ app.use(cors({
     origin:["http://localhost:5173", "http://localhost:5174"],
     credentials:true
 }))
-
+app.get("/", (req, res) => {
+    res.send("Backend is working!");
+});
  
 app.use("/api/auth",authrouter);
 app.use("/api/food",foodRouter);
