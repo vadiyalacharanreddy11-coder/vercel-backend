@@ -5,11 +5,15 @@ import foodRouter from "./routes/food.routes.js";
 import cors from "cors";
 import profileRouter from "./routes/foodpartner.routes.js";
 const app = express();
+const allowedOrigins = (
+    process.env.FRONTEND_URL || "http://localhost:5173,http://localhost:5174,https://vercel-ft.vercel.app"
+).split(",").map((origin) => origin.trim()).filter(Boolean);
+
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 app.use(cors({
-    origin:["http://localhost:5173", "http://localhost:5174","https://vercel-ft.vercel.app/"],
+    origin: allowedOrigins,
     credentials:true
 }))
 app.get("/", (req, res) => {
